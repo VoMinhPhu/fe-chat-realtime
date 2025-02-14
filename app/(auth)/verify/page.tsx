@@ -31,7 +31,7 @@ const Page = () => {
     if (isLogin === 'true') {
       if (isActive === 'true') setTimeout(() => router.push('/dashboard'), 500);
     } else {
-      setTimeout(() => router.push('/login'), 500);
+      setTimeout(() => router.push('/sign-in'), 500);
     }
   }, [router]);
 

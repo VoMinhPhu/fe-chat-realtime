@@ -94,6 +94,7 @@ const useVerify = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['verify'] });
       showToast('Verify Account', 'Verify Successfully!');
+      localStorage.setItem('isActive', 'true');
       setTimeout(() => router.push('/sign-in'), 1000);
     },
     onError: (error: errorResponse) => {
