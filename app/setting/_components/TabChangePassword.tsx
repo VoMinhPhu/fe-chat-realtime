@@ -36,7 +36,7 @@ const formChangePassword = z
   });
 
 const TabChangePassword = () => {
-  const { mutate: changePasswordFn, isPending } = useChangePassword();
+  const { mutate: changePasswordFn } = useChangePassword();
 
   const form = useForm<z.infer<typeof formChangePassword>>({
     resolver: zodResolver(formChangePassword),
