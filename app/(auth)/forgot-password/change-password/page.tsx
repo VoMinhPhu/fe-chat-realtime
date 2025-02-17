@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 
-import { useResendOtp, useVerify, useVerifyForgotPassword } from '@/utils/auth';
+import { useResendOtpToChangePassword, useVerifyForgotPassword } from '@/utils/auth';
 
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -27,7 +27,7 @@ const formVerify = z.object({
 const Page = () => {
   const [changePassword, setChangePassword] = useState(false);
   const { mutate: verifyFunc } = useVerifyForgotPassword();
-  const { mutate: resendOtpFn } = useResendOtp();
+  const { mutate: resendOtpFn } = useResendOtpToChangePassword();
   const userForgotPassword = useSelector((state: RootState) => state.user.userForgotPassword);
 
   const form = useForm<z.infer<typeof formVerify>>({

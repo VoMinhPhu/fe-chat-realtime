@@ -117,7 +117,7 @@ const useResendOtp = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: resendOtpToChangePasswordFn,
+    mutationFn: resendOtpFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['resendOtp'] });
       showToast('Resend OTP', 'Resend OTP Successfully!');

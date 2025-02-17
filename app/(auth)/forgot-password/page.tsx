@@ -27,7 +27,7 @@ const formForgotPassword = z.object({
 
 const Page = () => {
   const router = useRouter();
-  const { mutate: forgotPasswordFn, data } = useForgotPassword();
+  const { mutate: forgotPasswordFn } = useForgotPassword();
   const dispatch = useDispatch();
 
   useEffect(() => {

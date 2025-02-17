@@ -38,7 +38,7 @@ const formChangePassword = z
   });
 
 const FormChangePassword = () => {
-  const { mutate: changePasswordFn, isPending } = useChangePasswordWithoutOldPass();
+  const { mutate: changePasswordFn } = useChangePasswordWithoutOldPass();
   const userForgotPassword = useSelector((state: RootState) => state.user.userForgotPassword);
 
   const form = useForm<z.infer<typeof formChangePassword>>({
