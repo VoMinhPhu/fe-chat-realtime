@@ -24,7 +24,7 @@ export const useGetAllRequestWithMe = () => {
   return useQuery({
     queryKey: ['request'],
     queryFn: getAllRequestWithMe,
-    staleTime: 5 * 1000 * 60,
+    staleTime: 1 * 1000 * 60,
   });
 };
 
@@ -65,7 +65,7 @@ export const useGetRequestSent = () => {
   return useQuery({
     queryKey: ['requestSent'],
     queryFn: getRequestSent,
-    staleTime: 5 * 1000 * 60,
+    staleTime: 1 * 1000 * 60,
   });
 };
 

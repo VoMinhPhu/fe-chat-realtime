@@ -3,7 +3,17 @@
 import { showToast } from '@/lib/toast';
 import { useRouter } from 'next/navigation';
 import { errorResponse } from '@/types/errorRes';
-import { loginFn, resendOtpFn, signUpFn, verifyFn } from '@/app/api/auth/auth';
+import {
+  changePasswordFn,
+  changePasswordWithOutPassFn,
+  forgotPasswordFn,
+  loginFn,
+  resendOtpFn,
+  resendOtpToChangePasswordFn,
+  signUpFn,
+  verifyFn,
+  verifyForgotPasswordFn,
+} from '@/app/api/auth/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { resetUser } from '@/store/userSlice';
@@ -107,7 +117,7 @@ const useResendOtp = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: resendOtpFn,
+    mutationFn: resendOtpToChangePasswordFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['resendOtp'] });
       showToast('Resend OTP', 'Resend OTP Successfully!');
@@ -118,4 +128,86 @@ const useResendOtp = () => {
   });
 };
 
-export { useLogin, useLogout, useRegister, useVerify, useResendOtp };
+const useResendOtpToChangePassword = () => {
+  return useMutation({
+    mutationFn: resendOtpToChangePasswordFn,
+    onSuccess: () => {
+      showToast('Resend OTP', 'Resend OTP Successfully!');
+    },
+    onError: (error: errorResponse) => {
+      showToast('Resend OTP', error.message, 'error');
+    },
+  });
+};
+
+const useChangePassword = () => {
+  return useMutation({
+    mutationFn: changePasswordFn,
+    onSuccess: () => {
+      showToast('Change password', 'Successfully!');
+    },
+    onError: (error: errorResponse) => {
+      showToast('Change password', error.message, 'error');
+    },
+  });
+};
+
+const useChangePasswordWithoutOldPass = () => {
+  return useMutation({
+    mutationFn: changePasswordWithOutPassFn,
+    onSuccess: () => {
+      showToast('Change password', 'Successfully!');
+    },
+    onError: (error: errorResponse) => {
+      showToast('Change password', error.message, 'error');
+    },
+  });
+};
+
+const useVerifyForgotPassword = () => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: verifyForgotPasswordFn,
+    onSuccess: (data) => {
+      localStorage.setItem('isLogin', 'true');
+      localStorage.setItem('isActive', data.isActive);
+      localStorage.setItem('token', data.access_token);
+
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+      showToast('Verify', 'Successfully!');
+    },
+    onError: (error: errorResponse) => {
+      showToast('Verify', error.message, 'error');
+    },
+  });
+};
+
+const useForgotPassword = () => {
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: forgotPasswordFn,
+    onSuccess: () => {
+      showToast('Forgot password', 'Sent OTP to email!');
+      setTimeout(() => router.push('/forgot-password/change-password'), 500);
+    },
+    onError: (error: errorResponse) => {
+      showToast('Forgot password', error.message, 'error');
+    },
+  });
+};
+
+export {
+  useLogin,
+  useLogout,
+  useRegister,
+  useVerify,
+  useResendOtp,
+  useChangePassword,
+  useChangePasswordWithoutOldPass,
+  useForgotPassword,
+  useResendOtpToChangePassword,
+  useVerifyForgotPassword,
+};

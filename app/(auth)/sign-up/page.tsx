@@ -26,9 +26,20 @@ const formSignUp = z.object({
       message: 'Name is not empty!',
     })
     .max(50),
-  password: z.string().min(6, {
-    message: 'Password must contain at least 6 character(s)',
-  }),
+  password: z
+    .string()
+    .min(6, {
+      message: 'Password must contain at least 6 characters.',
+    })
+    .regex(/[A-Z]/, {
+      message: 'Password must contain at least one uppercase letter.',
+    })
+    .regex(/[a-z]/, {
+      message: 'Password must contain at least one lowercase letter.',
+    })
+    .regex(/[^A-Za-z0-9]/, {
+      message: 'Password must contain at least one special character.',
+    }),
 });
 
 const Page = () => {
