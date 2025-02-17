@@ -18,6 +18,7 @@ export interface UserState {
     avatar: string;
     chatId?: string;
   };
+  userForgotPassword: string;
 }
 
 const initialState: UserState = {
@@ -36,6 +37,7 @@ const initialState: UserState = {
     avatar: '',
     chatId: '',
   },
+  userForgotPassword: '',
 };
 
 export const userSlice = createSlice({
@@ -58,9 +60,12 @@ export const userSlice = createSlice({
       state.userSending.chatId = action.payload.chatId;
     },
     resetUser: () => initialState,
+    setUserForgotPassword: (state, action: PayloadAction<string>) => {
+      state.userForgotPassword = action.payload;
+    },
   },
 });
 
-export const { setCurrUser, setSendingUser, resetUser } = userSlice.actions;
+export const { setCurrUser, setSendingUser, resetUser, setUserForgotPassword } = userSlice.actions;
 
 export default userSlice.reducer;

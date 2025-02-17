@@ -98,6 +98,9 @@ const Page = () => {
                     </FormItem>
                   )}
                 />
+                <div className="text-right text-[#2563eb] text-sm font-semibold">
+                  <Link href="/forgot-password">Forgot password?</Link>
+                </div>
                 <div className="text-center">
                   <Button className="mt-4 w-full" type="submit">
                     Login
