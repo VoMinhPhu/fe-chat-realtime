@@ -1,8 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { RootState } from '@/store/store';
 import { setCurrUser } from '@/store/userSlice';
@@ -10,13 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useGetInfoCurrUser } from '@/app/api/user/user';
 
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-
 import HeaderSetting from './_components/HeaderSetting';
-import FormUpdateAvt from './_components/FormUpdateAvt';
-import FormUpdateInfoUser from './_components/FormUpdateInfoUser';
 import DashboardSetting from './_components/DashboardSetting';
 import TabProfile from './_components/TabProfile';
 import { cn } from '@/lib/utils';
