@@ -25,8 +25,8 @@ const FriendsDashboard = () => {
   }, [isSuccess, data]);
 
   return (
-    <Card className="w-full">
-      <CardHeader className="p-4 pb-7 h-[66px]">
+    <Card className="w-full mt-16 md:mt-0 rounded-none lg:rounded-lg">
+      <CardHeader className="p-4 pb-7 h-[66px] hidden md:block">
         <CardTitle>Friends</CardTitle>
       </CardHeader>
       <Separator />

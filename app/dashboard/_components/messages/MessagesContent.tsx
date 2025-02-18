@@ -3,11 +3,11 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
+import { cn } from '@/lib/utils';
+
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-import { cn } from '@/lib/utils';
 
 import { useSocket } from '@/components/SocketIoProvider';
 
@@ -24,14 +24,15 @@ import {
 import { useGetDetailChat } from '@/app/api/messages/messages';
 import { DataResponseFromSocketType, DetailChatMessageType, ReceiveMessagesFromSocketType } from '@/types/messages';
 
-import { SendHorizonal, MoreHorizontal } from 'lucide-react';
-
 import SubmenuMessage from './SubmenuMessage';
+import HeaderMessageContent from './HeaderMessageContent';
 import MessageContentLoading from './MessageContentLoading';
 
+import { SendHorizonal } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 
 const formMessageSchema = z.object({
   messages: z.string().trim().min(1),
@@ -171,28 +172,8 @@ const MessagePage = () => {
   };
   return (
     <>
-      <Card className="w-full flex flex-col m-4 ml-0 rounded-lg">
-        <CardHeader className="border-b px-3 py-2 flex flex-row items-center justify-between">
-          <div className="flex items-center hover:bg-[#ebebeb] dark:hover:bg-darkHover py-2 px-3 rounded-lg">
-            <Image
-              src={
-                userSending.avatar === '' || userSending.avatar === null
-                  ? '/avt.svg'
-                  : `data:image/jpg;base64,${userSending.avatar}`
-              }
-              width={36}
-              height={36}
-              alt="username"
-              className="rounded-full"
-            />
-            <p className="ml-2 font-semibold">{userSending.name}</p>
-          </div>
-          <div>
-            <Button variant="ghost" className="rounded-full p-3 dark:hover:bg-darkHover">
-              <MoreHorizontal />
-            </Button>
-          </div>
-        </CardHeader>
+      <Card className="w-full flex flex-col lg:m-4 lg:ml-0 ml-0 rounded-lg">
+        <HeaderMessageContent />
         <CardContent className="flex flex-col justify-start flex-1 overflow-y-scroll no-scrollbar">
           {isLoading && <MessageContentLoading />}
 
@@ -215,7 +196,7 @@ const MessagePage = () => {
 
                     <span
                       className={cn(
-                        'px-3 py-2 my-[2px] max-w-[calc(100%-120px)] bg-blue-600 border rounded-xl leading-5 whitespace-pre-line',
+                        'px-3 py-2 my-[2px] md:max-w-[calc(100%-120px)] max-w-[calc(100%-30px)] bg-blue-600 border rounded-xl leading-5 whitespace-pre-line',
                         {
                           'rounded-tr-md': !prevUserISending,
                           'rounded-br-md': !nextUserISending,
@@ -234,7 +215,7 @@ const MessagePage = () => {
               return (
                 <div key={item._id}>
                   <div className="flex justify-start group]">
-                    <div className="min-w-10 h-10 flex items-center justify-center mr-1 cursor-pointer">
+                    <div className="min-w-10 h-10 flex items-center justify-start md:justify-center mr-1 cursor-pointer">
                       {!nextUserISending && (
                         <Image
                           src={
@@ -251,7 +232,7 @@ const MessagePage = () => {
                     </div>
                     <span
                       className={cn(
-                        'px-3 bg-[#f6f6f6] py-2 my-[2px] max-w-[calc(100%-120px)] border dark:bg-darkHover rounded-2xl leading-5 whitespace-pre-line',
+                        'px-3 bg-[#f6f6f6] py-2 my-[2px] md:max-w-[calc(100%-120px)] max-w-[calc(100%-30px)] border dark:bg-darkHover rounded-2xl leading-5 whitespace-pre-line',
                         {
                           'rounded-tl-md': prevUserISending,
                           'rounded-bl-md': nextUserISending,
