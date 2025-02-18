@@ -6,15 +6,15 @@ import { useEffect, useState } from 'react';
 import { RequestResponseDataType } from '@/types/requestType';
 import { useGetAllRequestWithMe, useHandleRequest } from '@/app/api/requests/requests';
 
+import SentRequest from './SentRequest';
 import FormAddNewFriend from './FormAddNewFriend';
 
 import { X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import SentRequest from './SentRequest';
-import { Separator } from '@/components/ui/separator';
 
 const RequestDashboard = () => {
   const [requestsData, setRequestsData] = useState<RequestResponseDataType[]>();
@@ -39,8 +39,8 @@ const RequestDashboard = () => {
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader className="px-4 pt-2 h-[66px] flex-row items-center justify-between">
+    <Card className="w-full mt-16 md:mt-0 rounded-none lg:rounded-lg">
+      <CardHeader className="px-4 pt-2 h-[66px] flex-row items-center justify-between hidden md:flex">
         <CardTitle>Request</CardTitle>
         <FormAddNewFriend />
       </CardHeader>
@@ -74,10 +74,9 @@ const RequestDashboard = () => {
                 >
                   <Image src="/avt.svg" width={40} height={40} alt="avt" className="rounded-full w-10 h-10" />
                   <div className="flex w-full h-full ml-2">
-                    <p className="font-semibold flex-1">{item.fromUser.name}</p>
+                    <p className="font-semibold flex-1 flex items-center mr-2">{item.fromUser.name}</p>
                     <div className="group-hover:flex top-0 right-3 items-center justify-center flex h-full w-20 gap-2 text-xs">
-                      <Button onClick={() => handleRequest(item._id, 'accept')} className="w-18 h-8 mr-4">
-                        {/* <Check /> */}
+                      <Button onClick={() => handleRequest(item._id, 'accept')} className="w-18 h-8 rounded-sm mr-4">
                         Accept
                       </Button>
                       <Button

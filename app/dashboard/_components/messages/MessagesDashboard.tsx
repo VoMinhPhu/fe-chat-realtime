@@ -3,10 +3,14 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
+import { cn } from '@/lib/utils';
+import { getTimeAgo } from '@/utils/time';
+
 import { RootState } from '@/store/store';
 import { setSendingUser } from '@/store/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAllChatBox, setChatBoxJoined } from '@/store/chatboxSlice';
+import { setIsOpenDashboard, setMessageId } from '@/store/dashboardSlice';
 
 import { useSocket } from '@/components/SocketIoProvider';
 import { useGetAllChatBox } from '@/app/api/messages/messages';
@@ -15,15 +19,14 @@ import { GetAllChatBoxResponseDataType } from '@/types/messages';
 import { MoreHorizontal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { setMessageId } from '@/store/dashboardSlice';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getTimeAgo } from '@/utils/time';
-import { cn } from '@/lib/utils';
 
 const MessagesDashboard = () => {
   const { chatBoxJoined, allChatBox } = useSelector((state: RootState) => state.chatBox);
   const { currUser } = useSelector((state: RootState) => state.user);
+  const isOpen = useSelector((state: RootState) => state.dashboard.isOpen);
+
   const dispatch = useDispatch();
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -50,12 +53,13 @@ const MessagesDashboard = () => {
       dispatch(setChatBoxJoined(item._id));
     }
     dispatch(setMessageId(item._id));
+    dispatch(setIsOpenDashboard(!isOpen));
     dispatch(setSendingUser({ ...item.toUser, chatId: item._id }));
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader className="p-4 h-[66px]">
+    <Card className="w-full mt-16 md:mt-0 rounded-none lg:rounded-lg">
+      <CardHeader className="p-4 h-[66px] hidden md:block">
         <CardTitle>Messages</CardTitle>
       </CardHeader>
       <Separator />
