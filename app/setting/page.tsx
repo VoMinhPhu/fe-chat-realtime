@@ -23,6 +23,7 @@ const Page = () => {
 
   const currUser = useSelector((state: RootState) => state.user.currUser);
   const currTab = useSelector((state: RootState) => state.settingTab.currTab);
+  const isOpenNavOnMobile = useSelector((state: RootState) => state.settingTab.openNav);
 
   const dispatch = useDispatch();
 
@@ -42,12 +43,18 @@ const Page = () => {
   }, [data, isSuccess, dispatch]);
 
   return (
-    <div className="bg-[#f8f9fc] dark:bg-[#121212]">
+    <div className="bg-[#f8f9fc] dark:bg-[#121212] h-screen">
       <HeaderSetting />
-      <div className="pt-16 pb-4 flex justify-center">
-        <div className="max-w-[1200px] w-full grid grid-cols-4 gap-4 mt-6">
+      <div className="pt-16 pb-4 flex justify-center h-full">
+        <div className="max-w-[1200px] w-full grid md:grid-cols-3 mx-4 lg:grid-cols-4 gap-4 mt-6">
           <div>
-            <DashboardSetting />
+            <div
+              className={cn('fixed md:static md:block z-10 top-16 bottom-0 w-full left-0 animate-slide-in-left', {
+                hidden: !isOpenNavOnMobile,
+              })}
+            >
+              <DashboardSetting />
+            </div>
           </div>
           <div className="col-span-2">
             <div
