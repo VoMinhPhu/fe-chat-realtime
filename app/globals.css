@@ -6,6 +6,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+html {
+  height: 100vh;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -79,7 +83,6 @@ body {
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -92,7 +95,7 @@ body {
   .gradient-text {
     font-size: 48px;
     font-weight: bold;
-    background: linear-gradient(83.84deg, #0088FF -6.87%, #A033FF 26.54%, #FF5C87 58.58%);
+    background: linear-gradient(83.84deg, #0088ff -6.87%, #a033ff 26.54%, #ff5c87 58.58%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }

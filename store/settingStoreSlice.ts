@@ -3,10 +3,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface TabState {
   currTab: string;
+  openNav: boolean;
 }
 
 const initialState: TabState = {
   currTab: 'profile',
+  openNav: false,
 };
 
 export const tabSettingSlice = createSlice({
@@ -16,9 +18,12 @@ export const tabSettingSlice = createSlice({
     setCurrTab: (state, action: PayloadAction<{ data: string }>) => {
       state.currTab = action.payload.data;
     },
+    setOpenNav: (state, action: PayloadAction<boolean>) => {
+      state.openNav = action.payload;
+    },
   },
 });
 
-export const { setCurrTab } = tabSettingSlice.actions;
+export const { setCurrTab, setOpenNav } = tabSettingSlice.actions;
 
 export default tabSettingSlice.reducer;

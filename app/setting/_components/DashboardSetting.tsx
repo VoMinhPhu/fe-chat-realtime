@@ -3,18 +3,19 @@
 import { RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { setCurrTab } from '@/store/settingStoreSlice';
+
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { KeyRound, Trash2, UserPen } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { setCurrTab } from '@/store/settingStoreSlice';
 
 const DashboardSetting = () => {
   const currUser = useSelector((state: RootState) => state.user.currUser);
   const dispatch = useDispatch();
 
   return (
-    <Card className="p-4">
+    <Card className="p-4 h-full md:h-auto rounded-none md:rounded-lg">
       <div className="flex gap-4 mb-4">
         <Avatar className="w-14 h-14">
           <AvatarImage
@@ -23,9 +24,9 @@ const DashboardSetting = () => {
           />
           <AvatarFallback>avt</AvatarFallback>
         </Avatar>
-        <div>
+        <div className="mt-3">
           <p className="font-semibold">{currUser.name}</p>
-          <p className="text-[#007aff] text-sm">{currUser.username}</p>
+          <p className="text-[#007aff] text-xs break-words">{currUser.username}</p>
         </div>
       </div>
       <Separator />
