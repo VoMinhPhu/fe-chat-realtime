@@ -34,7 +34,7 @@ const DashboardSetting = () => {
         <p className="font-semibold">Account</p>
         <p
           onClick={() => dispatch(setCurrTab({ data: 'profile' }))}
-          className="text-sm my-2 p-2 rounded-sm ml-4 hover:cursor-pointer flex items-center gap-4 hover:bg-slate-100"
+          className="text-sm my-2 p-2 rounded-sm ml-4 hover:cursor-pointer flex items-center gap-4 hover:bg-slate-100 dark:hover:bg-[#3a3a3a]"
         >
           <span>
             <UserPen color="#007aff" />
@@ -43,7 +43,7 @@ const DashboardSetting = () => {
         </p>
         <p
           onClick={() => dispatch(setCurrTab({ data: 'changePassword' }))}
-          className="text-sm my-2 p-2 rounded-sm ml-4 hover:cursor-pointer flex items-center gap-4 hover:bg-slate-100"
+          className="text-sm my-2 p-2 rounded-sm ml-4 hover:cursor-pointer flex items-center gap-4 hover:bg-slate-100 dark:hover:bg-[#3a3a3a]"
         >
           <span>
             <KeyRound color="#007aff" />
@@ -52,7 +52,7 @@ const DashboardSetting = () => {
         </p>
         <p
           // onClick={() => dispatch(setCurrTab({ data: 'deleteAccount' }))}
-          className="text-sm my-2 p-2 rounded-sm ml-4 hover:cursor-pointer flex items-center gap-4 hover:bg-slate-100 text-[#f33535]"
+          className="text-sm my-2 p-2 rounded-sm ml-4 hover:cursor-pointer flex items-center gap-4 hover:bg-slate-100 dark:hover:bg-[#3a3a3a] text-[#f33535]"
         >
           <span>
             <Trash2 color="#f33535" />

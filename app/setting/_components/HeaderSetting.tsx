@@ -57,7 +57,10 @@ const HeaderSetting = () => {
     <div className="fixed z-50 top-0 h-16 w-full flex items-center justify-center border-b shadow-md bg-primary-foreground dark:bg-[#020817]">
       <div className="max-w-[1200px] h-full w-full flex items-center justify-between mx-2">
         <div className="flex">
-          <div onClick={handleOpenNav} className="md:hidden p-2 rounded-full hover:bg-[#dad8d8]">
+          <div
+            onClick={handleOpenNav}
+            className="md:hidden p-2 rounded-full hover:bg-[#dad8d8] dark:hover:bg-[#3a3a3a]"
+          >
             <Menu />
           </div>
           <Image priority src="/logo.svg" width={50} height={39} alt="logo" className="w-auto h-9" />
